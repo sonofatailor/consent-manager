@@ -5,6 +5,8 @@
 - custom integration will show up in the UI and users will be able to decide whether or not they consent it
 - hook has been made available, so that consent-manager can let your codebase know which integrations should be activated and which should not
 
+There might be other minor modifications that are meant to serve sonofatailor.com platform.
+
 > Drop-in consent management plugin for analytics.js
 
 [StoryBook](https://segmentio.github.io/consent-manager/index.html)
