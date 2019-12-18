@@ -19,7 +19,7 @@
     "standalone"
   ],
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "npm run build-esm",
     "test": "jest src/__tests__",
     "prepublishOnly": "yarn run clean && yarn run build",
     "postpublish": "yarn build-storybook && yarn deploy-storybook -- --existing-output-dir=storybook-static",
