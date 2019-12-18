@@ -1,5 +1,10 @@
 # consent-manager [![build status](https://circleci.com/gh/segmentio/consent-manager.svg?style=svg&circle-token=d3a9e0da7a07fb443f1b4e558ad9c60a55dca223)](https://circleci.com/gh/segmentio/consent-manager)
 
+**NOTE:** this fork has been relatively heavily modified to support external integrations. You can now: 
+- pass in custom integrations (structured in the same way as official integrations returned by `/integrations` endpoint)
+- custom integration will show up in the UI and users will be able to decide whether or not they consent it
+- hook has been made available, so that consent-manager can let your codebase know which integrations should be activated and which should not
+
 > Drop-in consent management plugin for analytics.js
 
 [StoryBook](https://segmentio.github.io/consent-manager/index.html)
