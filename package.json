@@ -19,6 +19,7 @@
     "standalone"
   ],
   "scripts": {
+    "prepare": "npm run build",
     "test": "jest src/__tests__",
     "prepublishOnly": "yarn run clean && yarn run build",
     "postpublish": "yarn build-storybook && yarn deploy-storybook -- --existing-output-dir=storybook-static",
@@ -84,7 +85,6 @@
     "husky": "^3.0.8",
     "jest": "^24.9.0",
     "lint-staged": "^7.0.4",
-    "lodash-es": "^4.17.10",
     "nock": "^9.2.5",
     "preact": "^10.0.0",
     "prettier": "1.18.2",
