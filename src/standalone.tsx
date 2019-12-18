@@ -5,6 +5,7 @@ import { ConsentManager, openConsentManager, doNotTrack } from '.'
 import { ConsentManagerProps, WindowWithConsentManagerConfig, ConsentManagerInput } from './types'
 import { CloseBehavior } from './consent-manager/container'
 import * as preferences from './consent-manager-builder/preferences'
+import { onLoadExternalDestinations } from './consent-manager-builder/analytics'
 
 export const version = process.env.VERSION
 export { openConsentManager, doNotTrack, inEU, preferences }
@@ -21,7 +22,8 @@ if (localWindow.consentManagerConfig && typeof localWindow.consentManagerConfig 
     openConsentManager,
     doNotTrack,
     inEU,
-    preferences
+    preferences,
+    onLoadExternalDestinations
   })
   containerRef = props.container
 } else {

@@ -46,6 +46,11 @@ interface Props {
   children: (props: RenderProps) => React.ReactElement
 
   /**
+   * Render props for the Consent Manager builder
+   */
+  externalDestinations?: Destination[]
+
+  /**
    * Allows for customizing how to show different categories of consent.
    */
   mapCustomPreferences?: (
@@ -137,6 +142,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
   initialise = async () => {
     const {
       writeKey,
+      externalDestinations,
       otherWriteKeys = ConsentManagerBuilder.defaultProps.otherWriteKeys,
       shouldRequireConsent = ConsentManagerBuilder.defaultProps.shouldRequireConsent,
       initialPreferences,
@@ -147,7 +153,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
 
     const [isConsentRequired, destinations] = await Promise.all([
       shouldRequireConsent(),
-      fetchDestinations([writeKey, ...otherWriteKeys])
+      fetchDestinations([writeKey, ...otherWriteKeys], externalDestinations || [])
     ])
 
     const newDestinations = getNewDestinations(destinations, destinationPreferences)
@@ -174,6 +180,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       writeKey,
       destinations,
       destinationPreferences,
+      externalDestinations,
       isConsentRequired
     })
 
@@ -213,7 +220,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
   }
 
   handleSaveConsent = (newPreferences: CategoryPreferences | undefined, shouldReload: boolean) => {
-    const { writeKey, cookieDomain, mapCustomPreferences } = this.props
+    const { writeKey, externalDestinations, cookieDomain, mapCustomPreferences } = this.props
 
     this.setState(prevState => {
       const { destinations, preferences: existingPreferences, isConsentRequired } = prevState
@@ -250,6 +257,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
         writeKey,
         destinations,
         destinationPreferences,
+        externalDestinations,
         isConsentRequired,
         shouldReload
       })
