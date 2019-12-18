@@ -16,6 +16,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
   static defaultProps = {
     otherWriteKeys: [],
     shouldRequireConsent: () => true,
+    externalDestinations: [],
     implyConsentOnInteraction: false,
     onError: undefined,
     cookieDomain: undefined,
@@ -29,21 +30,22 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
 
   render() {
     const {
-      writeKey,
-      otherWriteKeys,
-      shouldRequireConsent,
-      implyConsentOnInteraction,
-      cookieDomain,
+      bannerBackgroundColor,
       bannerContent,
       bannerSubContent,
       bannerTextColor,
-      bannerBackgroundColor,
-      preferencesDialogTitle,
-      preferencesDialogContent,
-      cancelDialogTitle,
       cancelDialogContent,
+      cancelDialogTitle,
+      cookieDomain,
       customCategories,
-      onError
+      externalDestinations,
+      implyConsentOnInteraction,
+      onError,
+      otherWriteKeys,
+      preferencesDialogContent,
+      preferencesDialogTitle,
+      shouldRequireConsent,
+      writeKey,
     } = this.props
 
     return (
@@ -52,6 +54,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
         writeKey={writeKey}
         otherWriteKeys={otherWriteKeys}
         shouldRequireConsent={shouldRequireConsent}
+        externalDestinations={externalDestinations}
         cookieDomain={cookieDomain}
         initialPreferences={this.getInitialPreferences()}
         mapCustomPreferences={this.handleMapCustomPreferences}

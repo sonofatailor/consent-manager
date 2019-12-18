@@ -21,13 +21,14 @@ export type ConsentManagerInput = ConsentManagerProps & {
   container: string
 }
 
-interface StandaloneConsentManagerParams {
+export interface StandaloneConsentManagerParams {
   React: unknown
   version?: string
   openConsentManager: () => void
   doNotTrack: () => boolean | null
   inEU: () => boolean
   preferences: PreferencesManager
+  onLoadExternalDestinations: (listener: (integrations: object) => void) => any
 }
 
 export interface Preferences {
@@ -38,7 +39,7 @@ export interface Preferences {
 export interface Destination {
   id: string
   name: string
-  creationName: string
+  creationName?: string
   description: string
   website: string
   category: string
@@ -64,6 +65,7 @@ export interface ConsentManagerProps {
   writeKey: string
   otherWriteKeys?: string[]
   shouldRequireConsent?: () => Promise<boolean> | boolean
+  externalDestinations?: Destination[]
   implyConsentOnInteraction?: boolean
   cookieDomain?: string
   bannerContent: React.ReactNode
