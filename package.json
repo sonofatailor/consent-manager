@@ -42,11 +42,11 @@
     "lodash": "^4.17.5",
     "nanoid": "^1.0.2",
     "prop-types": "^15.6.1",
+    "@segment/in-eu": "^0.3.0",
     "react-emotion": "^9.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@segment/in-eu": "^0.3.0",
     "@storybook/addon-actions": "^5.2.3",
     "@storybook/addon-info": "^5.2.3",
     "@storybook/addon-links": "^5.2.3",
