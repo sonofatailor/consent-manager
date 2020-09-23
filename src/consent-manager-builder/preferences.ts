@@ -29,7 +29,10 @@ export function loadPreferences(): Preferences {
   }
 }
 
-type SavePreferences = Preferences & { cookieDomain?: string }
+type SavePreferences = Preferences & {
+  cookieDomain?: string
+  integrationsExcludedFromLoading?: string[]
+}
 
 const emitter = new EventEmitter()
 
@@ -47,15 +50,21 @@ export function onPreferencesSaved(listener: (prefs: Preferences) => void) {
 export function savePreferences({
   destinationPreferences,
   customPreferences,
-  cookieDomain
+  cookieDomain,
+  integrationsExcludedFromLoading
 }: SavePreferences) {
   const wd = window as WindowWithAJS
 
   if (wd.analytics) {
+    const integrations = (integrationsExcludedFromLoading || []).reduce((acc, name) => ({
+      ...acc,
+      [name]: false,
+    }), {})
+
     wd.analytics.identify({
       destinationTrackingPreferences: destinationPreferences,
       customTrackingPreferences: customPreferences
-    })
+    }, { integrations })
   }
 
   const domain = cookieDomain || topDomain(window.location.href)

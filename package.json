@@ -1,6 +1,6 @@
 {
   "name": "@sonofatailor/consent-manager",
-  "version": "4.1.0-soat2",
+  "version": "4.1.0-soat3",
   "description": "Drop-in consent management plugin for analytics.js",
   "keywords": [
     "gdpr",

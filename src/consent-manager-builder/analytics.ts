@@ -10,7 +10,7 @@ interface AnalyticsParams {
   externalDestinations?: Destination[]
   isConsentRequired: boolean
   shouldReload?: boolean
-  integrationsExcludedFromLoading?: string[]
+  integrationsExcludedFromLoading: string[]
 }
 
 interface EmitLoadExternalDestinationParams {

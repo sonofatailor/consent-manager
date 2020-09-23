@@ -23,7 +23,8 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: true
+      isConsentRequired: true,
+      integrationsExcludedFromLoading: []
     })
 
     expect(ajsLoad.calledOnce).toBe(true)
@@ -48,7 +49,8 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: true
+      isConsentRequired: true,
+      integrationsExcludedFromLoading: []
     })
 
     expect(ajsLoad.notCalled).toBe(true)
@@ -67,7 +69,8 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: true
+      isConsentRequired: true,
+      integrationsExcludedFromLoading: []
     })
 
     expect(ajsLoad.notCalled).toBe(true)
@@ -91,13 +94,15 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: true
+      isConsentRequired: true,
+      integrationsExcludedFromLoading: []
     })
     conditionallyLoadAnalytics({
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: true
+      isConsentRequired: true,
+      integrationsExcludedFromLoading: []
     })
 
     expect(window.location.reload).toHaveBeenCalled()
@@ -121,14 +126,16 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: true
+      isConsentRequired: true,
+      integrationsExcludedFromLoading: []
     })
     conditionallyLoadAnalytics({
       writeKey,
       destinations,
       destinationPreferences,
       isConsentRequired: true,
-      shouldReload: false
+      shouldReload: false,
+      integrationsExcludedFromLoading: []
     })
 
     expect(reload.calledOnce).toBe(false)
@@ -145,7 +152,8 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: false
+      isConsentRequired: false,
+      integrationsExcludedFromLoading: []
     })
 
     expect(ajsLoad.calledOnce).toBe(true)
@@ -166,7 +174,8 @@ describe('analytics', () => {
       writeKey,
       destinations,
       destinationPreferences,
-      isConsentRequired: false
+      isConsentRequired: false,
+      integrationsExcludedFromLoading: []
     })
 
     expect(ajsLoad.calledOnce).toBe(true)

@@ -149,7 +149,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       shouldRequireConsent = ConsentManagerBuilder.defaultProps.shouldRequireConsent,
       initialPreferences,
       mapCustomPreferences,
-      integrationsExcludedFromLoading
+      integrationsExcludedFromLoading = []
     } = this.props
     // TODO: add option to run mapCustomPreferences on load so that the destination preferences automatically get updated
     let { destinationPreferences = {}, customPreferences } = loadPreferences()
@@ -185,7 +185,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       destinationPreferences,
       externalDestinations,
       isConsentRequired,
-      integrationsExcludedFromLoading
+      integrationsExcludedFromLoading,
     })
 
     this.setState({
@@ -224,7 +224,13 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
   }
 
   handleSaveConsent = (newPreferences: CategoryPreferences | undefined, shouldReload: boolean) => {
-    const { writeKey, externalDestinations, cookieDomain, mapCustomPreferences } = this.props
+    const {
+      writeKey,
+      externalDestinations,
+      cookieDomain,
+      mapCustomPreferences,
+      integrationsExcludedFromLoading = []
+    } = this.props
 
     this.setState(prevState => {
       const { destinations, preferences: existingPreferences, isConsentRequired } = prevState
@@ -256,14 +262,20 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
 
       const newDestinations = getNewDestinations(destinations, destinationPreferences)
 
-      savePreferences({ destinationPreferences, customPreferences, cookieDomain })
+      savePreferences({
+        destinationPreferences,
+        customPreferences,
+        cookieDomain,
+        integrationsExcludedFromLoading,
+      })
       conditionallyLoadAnalytics({
         writeKey,
         destinations,
         destinationPreferences,
         externalDestinations,
         isConsentRequired,
-        shouldReload
+        shouldReload,
+        integrationsExcludedFromLoading,
       })
 
       return { ...prevState, destinationPreferences, preferences, newDestinations }
