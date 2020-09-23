@@ -13,7 +13,6 @@ export { openConsentManager, doNotTrack, inEU, preferences }
 const initializeConsentManager = (
   getConsentManagerConfig: (args: StandaloneConsentManagerParams) => ConsentManagerInput
 ) => {
-  let containerRef: string | undefined
   let props: Partial<ConsentManagerInput> = {}
 
   props = getConsentManagerConfig({
@@ -25,7 +24,8 @@ const initializeConsentManager = (
     preferences,
     onLoadExternalDestinations
   })
-  containerRef = props.container
+
+  const containerRef: string | undefined = props.container
 
   if (!containerRef) {
     throw new Error('ConsentManager: container is required')

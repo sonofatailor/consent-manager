@@ -67,6 +67,8 @@ interface Props {
    * A callback for dealing with errors in the Consent Manager
    */
   onError?: (err: Error) => void | Promise<void>
+
+  integrationsExcludedFromLoading?: string[]
 }
 
 interface RenderProps {
@@ -146,7 +148,8 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       otherWriteKeys = ConsentManagerBuilder.defaultProps.otherWriteKeys,
       shouldRequireConsent = ConsentManagerBuilder.defaultProps.shouldRequireConsent,
       initialPreferences,
-      mapCustomPreferences
+      mapCustomPreferences,
+      integrationsExcludedFromLoading
     } = this.props
     // TODO: add option to run mapCustomPreferences on load so that the destination preferences automatically get updated
     let { destinationPreferences = {}, customPreferences } = loadPreferences()
@@ -181,7 +184,8 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
       destinations,
       destinationPreferences,
       externalDestinations,
-      isConsentRequired
+      isConsentRequired,
+      integrationsExcludedFromLoading
     })
 
     this.setState({

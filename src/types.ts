@@ -80,4 +80,5 @@ export interface ConsentManagerProps {
   closeBehavior?: CloseBehavior
   initialPreferences?: CategoryPreferences
   customCategories?: CustomCategories
+  integrationsExcludedFromLoading?: string[]
 }

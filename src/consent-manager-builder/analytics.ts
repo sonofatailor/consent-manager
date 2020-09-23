@@ -10,6 +10,7 @@ interface AnalyticsParams {
   externalDestinations?: Destination[]
   isConsentRequired: boolean
   shouldReload?: boolean
+  integrationsExcludedFromLoading?: string[]
 }
 
 interface EmitLoadExternalDestinationParams {
@@ -49,13 +50,27 @@ const emitLoadAllExternalDestinations = (externalDestinations: Destination[]): v
   emitter.emit('loadExternalDestinations', externalIntegrations)
 }
 
+const excludeIntegrations = (
+  integrations: Record<string, boolean>,
+  integrationsExcludedFromLoading: string[] | undefined
+) => {
+  return (integrationsExcludedFromLoading || []).reduce(
+    (acc, integrationName) => ({
+      ...acc,
+      [integrationName]: false
+    }),
+    integrations
+  )
+}
+
 export default function conditionallyLoadAnalytics({
   writeKey,
   destinations,
   destinationPreferences,
   externalDestinations = [],
   isConsentRequired,
-  shouldReload = true
+  shouldReload = true,
+  integrationsExcludedFromLoading
 }: AnalyticsParams) {
   const wd = window as WindowWithAJS
   const integrations = { All: false, 'Segment.io': true }
@@ -68,7 +83,9 @@ export default function conditionallyLoadAnalytics({
 
     // Load a.js normally when consent isn't required and there's no preferences
     if (!wd.analytics.initialized) {
-      wd.analytics.load(writeKey)
+      const integrationsToLoad = excludeIntegrations({}, integrationsExcludedFromLoading)
+
+      wd.analytics.load(writeKey, { integrations: integrationsToLoad })
       emitLoadAllExternalDestinations(externalDestinations)
     }
     return
@@ -93,8 +110,8 @@ export default function conditionallyLoadAnalytics({
 
   // Don't load a.js at all if nothing has been enabled
   if (isAnythingEnabled) {
-    // TODO: filter out external integrations
-    wd.analytics.load(writeKey, { integrations })
+    const integrationsToLoad = excludeIntegrations(integrations, integrationsExcludedFromLoading)
+    wd.analytics.load(writeKey, { integrations: integrationsToLoad })
     emitLoadExternalDestinations({ integrations, externalDestinations })
   }
 }

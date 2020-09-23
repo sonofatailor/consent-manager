@@ -25,7 +25,8 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
     bannerSubContent: 'You can change your preferences at any time.',
     bannerBackgroundColor: '#1f4160',
     preferencesDialogTitle: 'Website Data Collection Preferences',
-    cancelDialogTitle: 'Are you sure you want to cancel?'
+    cancelDialogTitle: 'Are you sure you want to cancel?',
+    integrationsExcludedFromLoading: []
   }
 
   render() {
@@ -39,6 +40,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
       cookieDomain,
       customCategories,
       externalDestinations,
+      integrationsExcludedFromLoading,
       implyConsentOnInteraction,
       onError,
       otherWriteKeys,
@@ -59,6 +61,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
         initialPreferences={this.getInitialPreferences()}
         mapCustomPreferences={this.handleMapCustomPreferences}
         customCategories={customCategories}
+        integrationsExcludedFromLoading={integrationsExcludedFromLoading}
       >
         {({
           destinations,

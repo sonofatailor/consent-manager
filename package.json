@@ -1,6 +1,6 @@
 {
-  "name": "@segment/consent-manager",
-  "version": "4.1.0-soat",
+  "name": "@sonofatailor/consent-manager",
+  "version": "4.1.0-soat2",
   "description": "Drop-in consent management plugin for analytics.js",
   "keywords": [
     "gdpr",
@@ -8,7 +8,7 @@
     "analytics",
     "analytics.js"
   ],
-  "repository": "segmentio/consent-manager",
+  "repository": "sonofatailor/consent-manager",
   "license": "MIT",
   "main": "commonjs/index.js",
   "module": "esm/index.js",
